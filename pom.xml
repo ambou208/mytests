@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>exercicesjava</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Make build platform independent -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- rest -->
+        <spark-core.version>2.9.1</spark-core.version>
+        <maven-compiler.version>3.5</maven-compiler.version>
+        <java.version>1.8</java.version>
+        <exec-maven.version>1.2.1</exec-maven.version>
+	    <main-class>ca.ulaval.glo.Main</main-class>
+        <slf4j-simple.version>1.7.25</slf4j-simple.version>
+        <maven-git-code-format.version>1.39</maven-git-code-format.version>
+    </properties>
+    <build>
+        <plugins>
+            <!-- general -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven.version}</version>
+                <configuration>
+                    <mainClass>${main-class}</mainClass>
+                </configuration>
+            </plugin>
+                <plugin>
+                    <groupId>com.cosium.code</groupId>
+                    <artifactId>maven-git-code-format</artifactId>
+                    <version>${maven-git-code-format.version}</version>
+                    <executions>
+                    <!-- On commit, format the modified java files -->
+                        <execution>
+                            <id>install-formatter-hook</id>
+                            <goals>
+                                <goal>install-hooks</goal>
+                            </goals>
+                        </execution>
+                        <!-- On Maven verify phase, fail if any file
+                        (including unmodified) is badly formatted -->
+                        <execution>
+                            <id>validate-code-format</id>
+                            <goals>
+                                <goal>validate-code-format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+     <!-- rest -->
+	    <dependency>
+	        <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>${spark-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
+        </dependency>
+
+    </dependencies>
+
+
+
+</project>
